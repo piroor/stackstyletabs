@@ -1,0 +1,34 @@
+<!ENTITY stackstyletabs.title             "Stack Style Tabs">
+
+
+<!ENTITY stackstyletabs.basic.group        "Behavior">
+<!ENTITY stackstyletabs.basic.likePlatform "Emulate stack-style-switching of windows in this platform">
+<!ENTITY stackstyletabs.basic.custom       "Custom">
+<!ENTITY stackstyletabs.basic.advance      "Advance...">
+<!ENTITY stackstyletabs.advance.title      "Advanced preferences of Stack Style Tabs">
+
+
+<!ENTITY stackstyletabs.mode                "Mode">
+<!ENTITY stackstyletabs.mode.disable        "Disabled">
+<!ENTITY stackstyletabs.mode.show           "Show popup">
+<!ENTITY stackstyletabs.mode.hide           "Show popup and Hide the Tab bar">
+<!ENTITY stackstyletabs.mode.auto           "Show and Hide the Tab bar automatically for switching">
+
+<!ENTITY stackstyletabs.last_selected_order          "Stacking Order">
+<!ENTITY stackstyletabs.last_selected_order.enabled  "as Last Selected">
+<!ENTITY stackstyletabs.last_selected_order.disabled "as Shown">
+
+<!ENTITY stackstyletabs.show_onkeypress          "Start switching of tabs when">
+<!ENTITY stackstyletabs.show_onkeypress.disabled "Press keyboard shortcuts which focuses to the next or the previous tab">
+<!ENTITY stackstyletabs.show_onkeypress.enabled  "Press only Ctrl(Command) key">
+
+<!ENTITY stackstyletabs.switch_onkeyrelease          "Switching mode">
+<!ENTITY stackstyletabs.switch_onkeyrelease.disabled "Switch tabs dynamically">
+<!ENTITY stackstyletabs.switch_onkeyrelease.enabled  "Switch only when the Ctrl(Command) key is released">
+
+
+<!ENTITY stackstyletabs.about.title       "About Stack Style Tabs">
+<!ENTITY stackstyletabs.about.name_before "Stack Style Tabs Ver.">
+<!ENTITY stackstyletabs.about.name_after  "">
+<!ENTITY stackstyletabs.about.destributed "http://piro.sakura.ne.jp/">
+<!ENTITY stackstyletabs.about.uninstall   "Uninstall">

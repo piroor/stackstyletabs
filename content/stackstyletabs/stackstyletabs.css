@@ -1,0 +1,8 @@
+[stackstyletabs-hidden="true"] {
+	visibility: collapse !important;
+}
+
+#stackstyletabs-popup menuitem[style][_moz-menuactive="true"] {
+	-moz-outline: solid medium;
+	font-weight: bold;
+}

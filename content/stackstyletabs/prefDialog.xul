@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+
+<?xul-overlay href="chrome://stackstyletabs/content/prefOverlay.xul"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://stackstyletabs/locale/">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		id="stackstyletabsPrefDialog"
+		windowtype="stackstyletabs:preferences"
+		title="&stackstyletabs.title;"
+		buttons="accept,cancel"
+		ondialogaccept="apply();"
+		ondialogcancel="window.close();"
+		orient="vertical"
+		onload="init();">
+
+<script type="application/x-javascript"><![CDATA[
+
+function init()
+{
+	gNodes = {
+		mode       : document.getElementById('mode'),
+		selected   : document.getElementById('last_selected_order'),
+		quickstart : document.getElementById('show_onkeypress'),
+		nodynamic  : document.getElementById('switch_onkeyrelease')
+	};
+
+	gAdvancePrefs = {
+		mode       : { node : gNodes.mode },
+		selected   : { node : gNodes.selected },
+		quickstart : { node : gNodes.quickstart },
+		nodynamic  : { node : gNodes.nodynamic }
+	};
+
+	var node,
+		value;
+	for (var i in _elementIDs)
+	{
+		node  = document.getElementById(_elementIDs[i]);
+		value = prefService.getPref(node.getAttribute('prefstring'));
+
+		switch (typeof value)
+		{
+			case 'string':
+			case 'number':
+				node.value = value;
+				break;
+			case 'boolean':
+				if (node.localName == 'checkbox')
+					node.checked = value;
+				else
+					node.value = value;
+				break;
+			default:
+				break;
+		}
+		if ('selectedItem' in node)
+			node.selectedItem = node.getElementsByAttribute('value', value)[0];
+	}
+
+	updateRadio();
+	onBasicChanged();
+
+	document.getElementById('uninstallBox').setAttribute('hidden', true);
+}
+
+function apply()
+{
+	var node,
+		prefstring,
+		value;
+	for (var i in _elementIDs)
+	{
+		node       = document.getElementById(_elementIDs[i]);
+		prefstring = node.getAttribute('prefstring');
+		value      = prefService.getPref(prefstring);
+		switch (typeof value)
+		{
+			case 'string':
+				if (node.value != value)
+					prefService.setPref(prefstring, String(node.value));
+				break;
+			case 'number':
+				if (node.value != value)
+					prefService.setPref(prefstring, Number(node.value));
+				break;
+			case 'boolean':
+				if (node.localName == 'checkbox') {
+					if (node.checked != value)
+						prefService.setPref(prefstring, node.checked != false);
+				}
+				else {
+					if ((node.value == 'true') != value)
+						prefService.setPref(prefstring, node.value == 'true');
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	window.close();
+}
+
+]]></script>
+
+<box id="stackstyletabsPrefs"/>
+
+</dialog>

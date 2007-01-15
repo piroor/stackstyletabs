@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://stackstyletabs/content/prefOverlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % versionDTD SYSTEM "chrome://stackstyletabs/content/_version.dtd">
+%versionDTD;
+<!ENTITY % stackstyletabsDTD SYSTEM "chrome://stackstyletabs/locale/">
+%stackstyletabsDTD;
+]>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<box orient="vertical" id="stackstyletabsPrefs">
+
+<script type="application/x-javascript" src="chrome://stackstyletabs/content/exUnregisterer.js"/>
+<script type="application/x-javascript" src="chrome://stackstyletabs/content/prefOverlay.js"/>
+
+
+	<groupbox>
+		<caption label="&stackstyletabs.basic.group;"/>
+		<radiogroup id="basic"
+			oncommand="onBasicChanged();">
+			<radio value="0" label="&stackstyletabs.basic.likePlatform;"/>
+			<box orient="horizontal">
+				<radio id="basic-custom"
+					value="1"
+					label="&stackstyletabs.basic.custom;"
+					linked="basic-custom-button"/>
+				<button id="basic-custom-button"
+					label="&stackstyletabs.basic.advance;"
+					oncommand="advancePrefs('chrome://stackstyletabs/content/prefAdvance.xul', gAdvancePrefs)"/>
+			</box>
+		</radiogroup>
+		<box collapsed="true">
+			<textbox id="mode"
+				prefstring="stackstyletabs.mode"
+				preftype="int"/>
+			<checkbox id="last_selected_order"
+				prefstring="stackstyletabs.last_selected_order"/>
+			<checkbox id="switch_onkeyrelease"
+				prefstring="stackstyletabs.switch_onkeyrelease"/>
+			<checkbox id="show_onkeypress"
+				prefstring="stackstyletabs.show_onkeypress"/>
+		</box>
+	</groupbox>
+
+	<spacer flex="1"/>
+
+	<groupbox orient="vertical">
+		<caption label="&stackstyletabs.about.title;"/>
+		<box orient="horizontal">
+			<spacer flex="1"/>
+			<description value="&stackstyletabs.about.name_before;&stackstyletabs.version;&stackstyletabs.about.name_after;"/>
+			<spacer flex="1"/>
+		</box>
+		<box orient="horizontal">
+			<spacer flex="1"/>
+			<description value="&stackstyletabs.about.destributed;"
+				onclick="loadURI('http://piro.sakura.ne.jp/');"
+				class="text-link"/>
+			<spacer flex="1"/>
+		</box>
+		<box orient="horizontal" id="uninstallBox">
+			<spacer flex="2"/>
+			<button flex="1"
+				label="&stackstyletabs.about.uninstall;"
+				oncommand="Unregister();"/>
+			<spacer flex="2"/>
+		</box>
+	</groupbox>
+
+</box>
+
+</overlay>

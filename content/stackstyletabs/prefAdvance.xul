@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://stackstyletabs/locale/">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	windowtype="stackstyletabs:advancePrefs"
+	orient="vertical"
+	title="&stackstyletabs.advance.title;"
+	buttons="accept,cancel"
+	ondialogaccept="apply();"
+	ondialogcancel="cancel();"
+	onload="init();">
+
+
+<script type="application/x-javascript" src="chrome://stackstyletabs/content/exUnregisterer.js"/>
+<script type="application/x-javascript" src="chrome://stackstyletabs/content/prefOverlay.js"/>
+<script type="application/x-javascript" src="chrome://stackstyletabs/content/advance.js"/>
+
+<box orient="vertical"
+	oncommand="onCommand(event)">
+
+
+		<groupbox>
+			<caption label="&stackstyletabs.mode;"/>
+			<radiogroup id="mode">
+				<radio value="0" label="&stackstyletabs.mode.disable;"/>
+				<radio value="1" label="&stackstyletabs.mode.show;"/>
+				<radio value="2" label="&stackstyletabs.mode.hide;"/>
+				<radio value="3" label="&stackstyletabs.mode.auto;"/>
+			</radiogroup>
+		</groupbox>
+
+		<groupbox>
+			<caption label="&stackstyletabs.last_selected_order;"/>
+			<radiogroup id="selected">
+				<radio value="false" label="&stackstyletabs.last_selected_order.disabled;"/>
+				<radio value="true"  label="&stackstyletabs.last_selected_order.enabled;"/>
+			</radiogroup>
+		</groupbox>
+
+		<groupbox>
+			<caption label="&stackstyletabs.switch_onkeyrelease;"/>
+			<radiogroup id="nodynamic">
+				<radio value="false" label="&stackstyletabs.switch_onkeyrelease.disabled;"/>
+				<radio value="true"  label="&stackstyletabs.switch_onkeyrelease.enabled;"/>
+			</radiogroup>
+		</groupbox>
+
+		<groupbox>
+			<caption label="&stackstyletabs.show_onkeypress;"/>
+			<radiogroup id="quickstart">
+				<radio value="false" label="&stackstyletabs.show_onkeypress.disabled;"/>
+				<radio value="true"  label="&stackstyletabs.show_onkeypress.enabled;"/>
+			</radiogroup>
+		</groupbox>
+
+
+</box>
+
+</dialog>
