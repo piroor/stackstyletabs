@@ -23,12 +23,14 @@
     <em:localized>
       <RDF:Description em:locale="en-US"
                        em:name="Stack Style Tabs"
-                       em:description="Makes the behavior of the operation to switch tabs by &quot;Ctrl(Command)-Tab&quot;, like the operation to switch windows in the platform. This will make the tab bar obsolete."/>
+                       em:description="Makes the behavior of the operation to switch tabs by &quot;Ctrl(Command)-Tab&quot;, like the operation to switch windows in the platform. This will make the tab bar obsolete."
+                       em:homepageURL="http://piro.sakura.ne.jp/xul/_stackstyletabs.html.en"/>
     </em:localized>
     <em:localized>
       <RDF:Description em:locale="ja-JP"
                        em:name="スタック型タブ"
-                       em:description="trl(Command)-Tabでのタブの切り替え操作をOS標準のウィンドウ切り替え操作のようなスタック型（最後に使ったウィンドウほど上位にくる）にし、タブバーを使わずに済むようにします。"/>
+                       em:description="trl(Command)-Tabでのタブの切り替え操作をOS標準のウィンドウ切り替え操作のようなスタック型（最後に使ったウィンドウほど上位にくる）にし、タブバーを使わずに済むようにします。"
+                       em:homepageURL="http://piro.sakura.ne.jp/xul/_stackstyletabs.html"/>
     </em:localized>
 
 
