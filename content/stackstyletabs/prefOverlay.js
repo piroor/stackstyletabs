@@ -41,7 +41,7 @@ function advancePrefs(aURI, aData)
 			switch (aData[i].node.localName)
 			{
 				case 'checkbox':
-					aData[i].node.checked = aData[i].newValue;
+					aData[i].node.checked = aData[i].newValue == 'true';
 					break;
 				case 'textbox':
 					aData[i].node.value = aData[i].newValue;
@@ -105,13 +105,15 @@ function loadURI(uri)
 }
  
 // Uninstall 
-var unreg = new exUnregisterer(
-	'chrome://stackstyletabs/content/contents.rdf',
-	'jar:%chromeFolder%stackstyletabs.jar!/locale/en-US/stackstyletabs/contents.rdf',
-	'jar:%chromeFolder%stackstyletabs.jar!/locale/ja-JP/stackstyletabs/contents.rdf'
-);
 var STRBUNDLE = Components.classes['@mozilla.org/intl/stringbundle;1'].getService(Components.interfaces.nsIStringBundleService);
 var msg = STRBUNDLE.createBundle('chrome://rubysupport/locale/rubysupport.properties');
+var unreg;
+if (location.href.indexOf('prefDialog.xul') < 0)
+	unreg = new exUnregisterer(
+		'chrome://stackstyletabs/content/contents.rdf',
+		'jar:%chromeFolder%stackstyletabs.jar!/locale/en-US/stackstyletabs/contents.rdf',
+		'jar:%chromeFolder%stackstyletabs.jar!/locale/ja-JP/stackstyletabs/contents.rdf'
+	);
 
 
 function Unregister()

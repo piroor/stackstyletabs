@@ -1,4 +1,4 @@
-var version     = '1.1.2006011601',
+var version     = '1.1.2008042801',
 	displayName = 'Stack Style Tabs',
 	appName     = 'stackstyletabs',
 	author      = 'SHIMODA Hiroshi',
