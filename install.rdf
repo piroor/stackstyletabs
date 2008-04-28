@@ -44,13 +44,7 @@
       <!-- Mozilla Suite -->
       <RDF:Description em:id="{86c18b42-e466-45a9-ae7a-9b95ba6f5640}"
                        em:minVersion="1.0"
-                       em:maxVersion="1.8.*" />
-    </em:targetApplication>
-    <em:targetApplication>
-      <!-- Netscape Browser 8 -->
-      <RDF:Description em:id="{86c18b42-e466-45a9-ae7a-9b95ba6f5640}"
-                       em:minVersion="8.0"
-                       em:maxVersion="8.*" />
+                       em:maxVersion="1.8+" />
     </em:targetApplication>
 	<em:file>
 		<RDF:Description RDF:about="urn:mozilla:extension:file:stackstyletabs.jar">
