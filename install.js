@@ -92,18 +92,17 @@ else {
 
 
 		// Language packs
-		if ('hasLangPack' in this && hasLangPack) {
-			registerChrome(localeFlag, folder, 'locale/en-US/'+appName+'/');
-			for (i = 0; i < installedOptions.length; i++)
-				registerChrome(localeFlag, folder, 'locale/en-US/'+installedOptions[i]+'/');
+		registerChrome(localeFlag, folder, 'locale/en-US/'+appName+'/');
+		for (i = 0; i < installedOptions.length; i++)
+			registerChrome(localeFlag, folder, 'locale/en-US/'+installedOptions[i]+'/');
 
-			if ('hasJLP' in this && hasJLP && confirm(messages.JLP)) {
-				registerChrome(localeFlag, folder, 'locale/ja-JP/'+appName+'/');
+		registerChrome(localeFlag, folder, 'locale/ja-JP/'+appName+'/');
+		for (i = 0; i < installedOptions.length; i++)
+			registerChrome(localeFlag, folder, 'locale/ja-JP/'+installedOptions[i]+'/');
 
-				for (i = 0; i < installedOptions.length; i++)
-					registerChrome(localeFlag, folder, 'locale/ja-JP/'+installedOptions[i]+'/');
-			}
-		}
+		registerChrome(localeFlag, folder, 'locale/it-IT/'+appName+'/');
+		for (i = 0; i < installedOptions.length; i++)
+			registerChrome(localeFlag, folder, 'locale/it-IT/'+installedOptions[i]+'/');
 
 		if ('hasSkin' in this && hasSkin) {
 			registerChrome(skinFlag, folder, 'skin/classic/'+appName+'/');
