@@ -44,6 +44,23 @@ var StackStyleTabsService = {
 	},
 	_browser : null,
 
+	get tabs()
+	{
+		var tabs = document.evaluate(
+				'descendant::*[local-name()="tab"]',
+				this.browser.mTabContainer,
+				null,
+				XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+				null
+			);
+		var array = [];
+		for (var i = 0, maxi = tabs.snapshotLength; i < maxi)
+		{
+			array.push(tabs.snapshotItem(i));
+		}
+		return array;
+	},
+
 	get popup()
 	{
 		if (!this._popup)
@@ -95,7 +112,7 @@ var StackStyleTabsService = {
 	onKeyDown : function(aEvent) 
 	{
 		if (
-			StackStyleTabsService.browser.mTabContainer.childNodes.length > 1 &&
+			StackStyleTabsService.tabs.length > 1 &&
 			!aEvent.altKey &&
 			(navigator.platform.match(/mac/i) ? aEvent.metaKey : aEvent.ctrlKey )
 			) {
@@ -257,7 +274,7 @@ var StackStyleTabsService = {
 				if (this.popupShown &&
 					nsPreferences.getBoolPref('stackstyletabs.switch_onkeyrelease') &&
 					!aPreventSwitchTab) {
-					var tab = ('mTabs' in this.browser ? this.browser.mTabs : this.browser.mTabContainer.childNodes )[popup.childNodes[popup.currentIndex].index];
+					var tab = this.tabs[popup.childNodes[popup.currentIndex].index];
 
 					this.browser.selectedTab = tab;
 				}
@@ -282,7 +299,7 @@ var StackStyleTabsService = {
 
 		var i;
 		var b = this.browser;
-		var tabs = 'mTabs' in b ? b.mTabs : b.mTabContainer.childNodes ; // 'mTabs' is for TBE
+		var tabs = this.tabs;
 
 		var sortLastSelected = nsPreferences.getBoolPref('stackstyletabs.last_selected_order');
 
@@ -373,8 +390,7 @@ var StackStyleTabsService = {
 	onItemSelect : function(aItem) 
 	{
 		var b = this.browser;
-		var tabs = 'mTabs' in b ? b.mTabs : b.mTabContainer.childNodes ; // 'mTabs' is for TBE
-		b.selectedTab = tabs[aItem.index];
+		b.selectedTab = this.tabs[aItem.index];
 
 		this.showHidePopup(false);
 	},
@@ -392,8 +408,7 @@ var StackStyleTabsService = {
 			popup.currentIndex = (popup.currentIndex + 1) % popup.childNodes.length;
 
 		if (!nsPreferences.getBoolPref('stackstyletabs.switch_onkeyrelease')) {
-			var tabs = 'mTabs' in this.browser ? this.browser.mTabs : this.browser.mTabContainer.childNodes ; // 'mTabs' is for TBE
-			this.browser.selectedTab = tabs[popup.childNodes[popup.currentIndex].index];
+			this.browser.selectedTab = this.tabs[popup.childNodes[popup.currentIndex].index];
 		}
 
 		popup.childNodes[popup.currentIndex].setAttribute('_moz-menuactive', true);
