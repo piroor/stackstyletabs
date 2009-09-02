@@ -1,19 +1,30 @@
-// start of definition 
-if (!window.StackStyleTabsService) {
+var StackStyleTabsService = { 
+	
+	mode : 0, 
+	kMODE_DISABLED        : 0,
+	kMODE_SHOW_TABBAR     : 1,
+	kMODE_HIDE_TABBAR     : 2,
+	kMODE_AUTOHIDE_TABBAR : 3,
 
-var StackStyleTabsService = {
-
-	get popupShown()
+	shouldSortByLastSelected : false,
+	shouldSwitchImmediately : false,
+	shouldShowImmediately : false,
+ 
+	// properties 
+	
+	isMac : navigator.platform.match(/mac/i), 
+ 
+	get popupShown() 
 	{
 		return (this.popup.boxObject.height > 0);
 	},
-
-	get browser()
+ 
+	get browser() 
 	{
 		return gBrowser;
 	},
-
-	get tabs()
+ 
+	get tabs() 
 	{
 		var tabs = document.evaluate(
 				'descendant::*[local-name()="tab"]',
@@ -29,76 +40,119 @@ var StackStyleTabsService = {
 		}
 		return array;
 	},
-
-	get popup()
+ 
+	get popup() 
 	{
 		if (!this._popup)
 			this._popup = document.getElementById('stackstyletabs-popup');
 		return this._popup;
 	},
 	_popup : null,
-	
-	// ƒCƒxƒ“ƒg‚Ì•ß‘¨ 
+  
+	// initialize 
 	
 	init : function() 
 	{
 		if (!this.browser) return;
 
-		window.addEventListener('keydown',   this.onKeyDown,    true);
-		window.addEventListener('keyup',     this.onKeyRelease, true);
-		window.addEventListener('keypress',  this.onKeyRelease, true);
-		window.addEventListener('mousedown', this.onMouseDown,  true);
+		window.addEventListener('keydown', this, true);
+		window.addEventListener('keyup', this, true);
+		window.addEventListener('keypress', this, true);
+		window.addEventListener('mousedown', this, true);
 
-		this.browser.mTabContainer.addEventListener('select', this.onTabSelect, true);
-		this.browser.selectedTab.__stackstyletabs__lastSelectedTime = (new Date()).getTime();
+		this.initBrowser(this.browser);
 
-		StackStyleTabsService.hideTabs();
+		this.addPrefListener(this);
 
-		window.addEventListener('unload', StackStyleTabsService.onKeyRelease, true);
-		window.setTimeout('StackStyleTabsService.hideTabs();', 0)
-		window.setTimeout('StackStyleTabsService.hideTabs();', 100)
+		this.onPrefChange('stackstyletabs.mode');
+		this.onPrefChange('stackstyletabs.last_selected_order');
+		this.onPrefChange('stackstyletabs.show_onkeypress');
+		this.onPrefChange('stackstyletabs.switch_onkeyrelease');
 	},
- 
-	destruct : function() 
+	
+	initBrowser : function(aBrowser) 
 	{
-		var obj = StackStyleTabsService;
-		if (!obj.browser) return;
-
-		obj.browser.mTabContainer.removeEventListener('select', obj.onTabSelect, true);
-
-		window.removeEventListener('keydown',   obj.onKeyDown,    true);
-		window.removeEventListener('keyup',     obj.onKeyRelease, true);
-		window.removeEventListener('keypress',  obj.onKeyRelease, true);
-		window.removeEventListener('mousedown', obj.onMouseDown,  true);
+		if (aBrowser.localName != 'tabbrowser') return;
+		aBrowser.mTabContainer.addEventListener('select', this, true);
+		aBrowser.selectedTab.__stackstyletabs__lastSelectedTime = Date.now();
 	},
- 
+  
+	destroy : function() 
+	{
+		if (!this.browser) return;
+
+		window.removeEventListener('keydown', this, true);
+		window.removeEventListener('keyup', this, true);
+		window.removeEventListener('keypress', this, true);
+		window.removeEventListener('mousedown', this, true);
+
+		this.destroyBrowser(this.browser);
+
+		this.removePrefListener(this);
+	},
+	
+	destroyBrowser : function(aBrowser) 
+	{
+		if (aBrowser.localName != 'tabbrowser') return;
+		aBrowser.mTabContainer.removeEventListener('select', this, true);
+	},
+   
+	handleEvent : function(aEvent) 
+	{
+		switch (aEvent.type)
+		{
+			case 'load':
+				window.removeEventListener('load', this, false);
+				this.init();
+				break;
+
+			case 'unload':
+				window.removeEventListener('unload', this, false);
+				this.destroy();
+				break;
+
+			case 'keydown':
+				this.onKeyDown(aEvent);
+				return;
+
+			case 'keyup':
+			case 'keypress':
+				this.onKeyRelease(aEvent);
+				return;
+
+			case 'mousedown':
+				this.onMouseDown(aEvent);
+				return;
+		}
+	},
+	
 	onTabSelect : function(aEvent) 
 	{
-		if (!StackStyleTabsService.popupShown)
-			StackStyleTabsService.browser.selectedTab.__stackstyletabs__lastSelectedTime = (new Date()).getTime();
+		if (!this.popupShown)
+			this.browser.selectedTab.__stackstyletabs__lastSelectedTime = Date.now();
 	},
  
 	onKeyDown : function(aEvent) 
 	{
 		if (
-			StackStyleTabsService.tabs.length > 1 &&
+			this.tabs.length > 1 &&
 			!aEvent.altKey &&
-			(navigator.platform.match(/mac/i) ? aEvent.metaKey : aEvent.ctrlKey )
+			(this.isMac ? aEvent.metaKey : aEvent.ctrlKey )
 			) {
-			if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.show_onkeypress'))
-				StackStyleTabsService.showTabs();
+			if (this.shouldShowImmediately)
+				this.showTabs();
 		}
-		else
-			StackStyleTabsService.hideTabs();
+		else {
+			this.hideTabs();
+		}
 	},
  
 	onKeyRelease : function(aEvent) 
 	{
 		var scrollDown,
 			scrollUp;
-		var isMac = navigator.platform.match(/mac/i);
 
-		var standBy = scrollDown = scrollUp = (!aEvent.altKey && (isMac ? aEvent.metaKey : aEvent.ctrlKey ));
+		var standBy = scrollDown = scrollUp = (!aEvent.altKey && (this.isMac ? aEvent.metaKey : aEvent.ctrlKey ));
 
 		scrollDown = scrollDown && (
 				!aEvent.shiftKey &&
@@ -116,37 +170,37 @@ var StackStyleTabsService = {
 			scrollDown ||
 			scrollUp ||
 			( // when you release "shift" key on the menu
-				StackStyleTabsService.popupShown &&
+				this.popupShown &&
 				standBy && !aEvent.shiftKey &&
 				aEvent.charCode == 0 && aEvent.keyCode == 16
 			)
 			) {
-			StackStyleTabsService.showTabs(true);
+			this.showTabs(true);
 			if (
 				aEvent.type == 'keypress' &&
 				(
-					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
-					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
+					this.mode == this.kMODE_SHOW_TABBAR ||
+					this.mode == this.kMODE_HIDE_TABBAR
 				)
 				) {
 				aEvent.preventDefault();
 				aEvent.stopPropagation();
-				StackStyleTabsService.scrollUpDown(scrollDown ? 1 : -1 );
+				this.scrollUpDown(scrollDown ? 1 : -1 );
 			}
 
 			return;
 		}
 
 
-		var switchTabAction = aEvent.keyCode == (isMac ? aEvent.DOM_VK_META : aEvent.DOM_VK_CONTROL );
+		var switchTabAction = aEvent.keyCode == (this.isMac ? aEvent.DOM_VK_META : aEvent.DOM_VK_CONTROL );
 
-		var shown  = StackStyleTabsService.popupShown;
+		var shown  = this.popupShown;
 
-		StackStyleTabsService.hideTabs(!switchTabAction);
+		this.hideTabs(!switchTabAction);
 
 		// if this even hides the popup, re-dispatch a new event for other features.
 		if (shown &&
-			!StackStyleTabsService.popupShown &&
+			!this.popupShown &&
 			!switchTabAction &&
 			aEvent && aEvent.type == 'keypress') {
 			var event = document.createEvent('KeyEvents');
@@ -192,9 +246,42 @@ var StackStyleTabsService = {
 		catch(e) {
 		}
 
-		if (!StackStyleTabsService.popupShown) return;
+		if (!this.popupShown) return;
 
-		StackStyleTabsService.onKeyRelease(aEvent);
+		this.onKeyRelease(aEvent);
+	},
+  
+	observe : function(aSubject, aTopic, aData) 
+	{
+		if (aTopic == 'nsPref:changed')
+			this.onPrefChange(aData);
+	},
+	
+	domain : 'stackstyletabs.', 
+ 
+	onPrefChange : function(aPref) 
+	{
+		var value = this.getPref(aPref);
+		switch (aPref)
+		{
+			case 'stackstyletabs.mode':
+				this.mode = value;
+				this.hideTabs();
+				return;
+
+			case 'stackstyletabs.last_selected_order':
+				this.shouldSortByLastSelected = value;
+				return;
+
+			case 'stackstyletabs.show_onkeypress':
+				this.shouldShowImmediately = value;
+				return;
+
+			case 'stackstyletabs.switch_onkeyrelease':
+				this.shouldSwitchImmediately = value;
+				return;
+
+		}
 	},
   
 	showTabs : function() 
@@ -203,13 +290,13 @@ var StackStyleTabsService = {
 		if (!b) return;
 
 		if (
-			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
-			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
+			this.mode == this.kMODE_SHOW_TABBAR ||
+			this.mode == this.kMODE_HIDE_TABBAR
 			) {
 			this.showHidePopup(true);
 		}
 
-		if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 3) {
+		if (this.mode == this.kMODE_AUTOHIDE_TABBAR) {
 			b.mStrip.collapsed = false;
 			b.mStrip.removeAttribute('stackstyletabs-hidden');
 		}
@@ -221,16 +308,16 @@ var StackStyleTabsService = {
 		if (!b) return;
 
 		if (
-			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
-			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
+			this.mode == this.kMODE_SHOW_TABBAR ||
+			this.mode == this.kMODE_HIDE_TABBAR
 			) {
 			this.showHidePopup(false, aPreventSwitchTab);
 		}
 
-		if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') > 1) {
-			b.mStrip.collapsed = true;
+		if (this.mode > this.kMODE_SHOW_TABBAR)
 			b.mStrip.setAttribute('stackstyletabs-hidden', true);
-		}
+		else
+			b.mStrip.removeAttribute('stackstyletabs-hidden');
 	},
  
 	showHidePopup : function(aShow, aPreventSwitchTab) 
@@ -241,7 +328,7 @@ var StackStyleTabsService = {
 		if (!aShow) {
 			if (popup.hasChildNodes()) {
 				if (this.popupShown &&
-					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.switch_onkeyrelease') &&
+					this.shouldSwitchImmediately &&
 					!aPreventSwitchTab) {
 					var tab = this.tabs[popup.childNodes[popup.currentIndex].index];
 
@@ -257,7 +344,7 @@ var StackStyleTabsService = {
 
 				popup.currentIndex = 0;
 
-				this.browser.selectedTab.__stackstyletabs__lastSelectedTime = (new Date()).getTime();
+				this.browser.selectedTab.__stackstyletabs__lastSelectedTime = Date.now();
 			}
 			return;
 		}
@@ -270,9 +357,7 @@ var StackStyleTabsService = {
 		var b = this.browser;
 		var tabs = this.tabs;
 
-		var sortLastSelected = window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.last_selected_order');
-
-		if (sortLastSelected) {
+		if (this.shouldSortByLastSelected) {
 			var tmpTabs     = [];
 			var focusedTabs = [];
 			for (var i = 0; i < tabs.length; i++)
@@ -293,46 +378,17 @@ var StackStyleTabsService = {
 
 			tabs = focusedTabs.concat(tmpTabs);
 		}
-		else {
-			if ('mTabs' in b &&
-				window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.menu_sorting.enabled')) { // for TBE
-				var root = { childTabs : [] };
-				for (i in b.mTabs)
-					if (!b.mTabs[i].parentTab)
-						root.childTabs.push(b.mTabs[i]);
-				root.childTabs.sort(b.conpareHasChildTabs);
-
-				tabs = b.gatherChildTabsOf(root);
-			}
-		}
 
 		var tab, label;
 		for (i = 0; i < tabs.length; i++)
 		{
 			popup.appendChild(document.createElement('menuitem'));
 
-			popup.lastChild.index = sortLastSelected ? tabs[i].__stackstyletabs__index : i ;
+			popup.lastChild.index = this.shouldSortByLastSelected ? tabs[i].__stackstyletabs__index : i ;
 
 			popup.lastChild.setAttribute('class', 'menuitem-iconic bookmark-item');
 			popup.lastChild.setAttribute('image', tabs[i].getAttribute('image'));
 			popup.lastChild.setAttribute('label', tabs[i].label);
-
-
-			if (!sortLastSelected && 'parentTab' in tabs[i]) { // for TBE
-				label = [];
-				tab   = tabs[i];
-				while (tab.parentTab)
-				{
-					tab = tab.parentTab;
-					label.push('  ');
-				}
-				label.push(tabs[i].label);
-				popup.lastChild.setAttribute('label', label.join(''));
-			}
-
-			if ('mLabelContainer' in tabs[i] &&
-				tabs[i].mLabelContainer.hasAttribute('style')) // for TBE
-				popup.lastChild.setAttribute('style', tabs[i].mLabelContainer.getAttribute('style'));
 		}
 
 		popup.setAttribute('style',
@@ -350,9 +406,8 @@ var StackStyleTabsService = {
 			null
 		);
 
-		popup.currentIndex = sortLastSelected ? 0 :
-							('tabIndex' in b.selectedTab) ? b.selectedTab.tabIndex :
-							b.mTabContainer.selectedIndex ; // 'tabIndex' is for TBE
+		popup.currentIndex = this.shouldSortByLastSelected ? 0 :
+							b.mTabContainer.selectedIndex ;
 		popup.childNodes[popup.currentIndex].setAttribute('_moz-menuactive', true);
 	},
  
@@ -376,7 +431,7 @@ var StackStyleTabsService = {
 		else
 			popup.currentIndex = (popup.currentIndex + 1) % popup.childNodes.length;
 
-		if (!window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.switch_onkeyrelease')) {
+		if (!this.shouldSwitchImmediately) {
 			this.browser.selectedTab = this.tabs[popup.childNodes[popup.currentIndex].index];
 		}
 
@@ -395,8 +450,8 @@ var StackStyleTabsService = {
 	}
  
 }; 
+StackStyleTabsService.__proto__ = window['piro.sakura.ne.jp'].prefs;
+
+window.addEventListener('load', StackStyleTabsService, false);
+window.addEventListener('unload', StackStyleTabsService, false);
   
-// end of definition 
-window.setTimeout('StackStyleTabsService.init();', 100);
-}
- 
