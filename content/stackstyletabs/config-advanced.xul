@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://stackstyletabs/locale/">
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	windowtype="stackstyletabs:advancePrefs"
+	type="child"
+	title="&config.advance.title;">
+
+<prefpane id="prefpane-advanced" flex="1">
+	<preferences>
+		<preference id="stackstyletabs.mode"
+			name="stackstyletabs.mode"
+			type="int"/>
+		<preference id="stackstyletabs.last_selected_order"
+			name="stackstyletabs.last_selected_order"
+			type="bool"/>
+		<preference id="stackstyletabs.switch_onkeyrelease"
+			name="stackstyletabs.switch_onkeyrelease"
+			type="bool"/>
+		<preference id="stackstyletabs.show_onkeypress"
+			name="stackstyletabs.show_onkeypress"
+			type="bool"/>
+	</preferences>
+
+	<groupbox>
+		<caption label="&config.mode;"/>
+		<radiogroup id="mode"
+			preference="stackstyletabs.mode">
+			<radio value="0" label="&config.mode.disable;"/>
+			<radio value="1" label="&config.mode.show;"/>
+			<radio value="2" label="&config.mode.hide;"/>
+			<radio value="3" label="&config.mode.auto;"/>
+		</radiogroup>
+	</groupbox>
+
+	<groupbox>
+		<caption label="&config.last_selected_order;"/>
+		<radiogroup id="selected"
+			preference="stackstyletabs.last_selected_order">
+			<radio value="false" label="&config.last_selected_order.disabled;"/>
+			<radio value="true"  label="&config.last_selected_order.enabled;"/>
+		</radiogroup>
+	</groupbox>
+
+	<groupbox>
+		<caption label="&config.switch_onkeyrelease;"/>
+		<radiogroup id="nodynamic"
+			preference="stackstyletabs.switch_onkeyrelease">
+			<radio value="false" label="&config.switch_onkeyrelease.disabled;"/>
+			<radio value="true"  label="&config.switch_onkeyrelease.enabled;"/>
+		</radiogroup>
+	</groupbox>
+
+	<groupbox>
+		<caption label="&config.show_onkeypress;"/>
+		<radiogroup id="quickstart"
+			preference="stackstyletabs.show_onkeypress">
+			<radio value="false" label="&config.show_onkeypress.disabled;"/>
+			<radio value="true"  label="&config.show_onkeypress.enabled;"/>
+		</radiogroup>
+	</groupbox>
+
+</prefpane>
+
+</prefwindow>

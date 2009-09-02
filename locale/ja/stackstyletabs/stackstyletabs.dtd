@@ -1,34 +1,27 @@
-<!ENTITY stackstyletabs.title              "スタック型タブ">
+<!ENTITY config.title              "スタック型タブ">
 
 
-<!ENTITY stackstyletabs.basic.group        "タブ切り替え時の挙動">
-<!ENTITY stackstyletabs.basic.likePlatform "プラットフォームのウィンドウ切り替え操作と同じ挙動">
-<!ENTITY stackstyletabs.basic.custom       "カスタム">
-<!ENTITY stackstyletabs.basic.advance      "詳細設定...">
-<!ENTITY stackstyletabs.advance.title      "スタック型タブの詳細設定">
+<!ENTITY config.basic.group        "タブ切り替え時の挙動">
+<!ENTITY config.basic.likePlatform "プラットフォームのウィンドウ切り替え操作と同じ挙動">
+<!ENTITY config.basic.custom       "カスタム">
+<!ENTITY config.basic.advance      "詳細設定...">
+<!ENTITY config.advance.title      "スタック型タブの詳細設定">
 
 
-<!ENTITY stackstyletabs.mode                "動作モード">
-<!ENTITY stackstyletabs.mode.disable        "オフ">
-<!ENTITY stackstyletabs.mode.show           "ポップアップを表示">
-<!ENTITY stackstyletabs.mode.hide           "タブバーを隠してポップアップだけを表示">
-<!ENTITY stackstyletabs.mode.auto           "タブ切り替え時にのみタブバーを表示">
+<!ENTITY config.mode                "動作モード">
+<!ENTITY config.mode.disable        "オフ">
+<!ENTITY config.mode.show           "ポップアップを表示">
+<!ENTITY config.mode.hide           "タブバーを隠してポップアップだけを表示">
+<!ENTITY config.mode.auto           "タブ切り替え時にのみタブバーを表示">
 
-<!ENTITY stackstyletabs.last_selected_order          "タブの切り替え順序">
-<!ENTITY stackstyletabs.last_selected_order.disabled "タブバー上での並び順">
-<!ENTITY stackstyletabs.last_selected_order.enabled  "最後に表示した順">
+<!ENTITY config.last_selected_order          "タブの切り替え順序">
+<!ENTITY config.last_selected_order.disabled "タブバー上での並び順">
+<!ENTITY config.last_selected_order.enabled  "最後に表示した順">
 
-<!ENTITY stackstyletabs.show_onkeypress          "タブ切り替え操作を始めるタイミング">
-<!ENTITY stackstyletabs.show_onkeypress.disabled "タブ切り替えのキーボードショートカットを使ったときに始める">
-<!ENTITY stackstyletabs.show_onkeypress.enabled  "Ctrl(Command)キーを押しただけで始める">
+<!ENTITY config.show_onkeypress          "タブ切り替え操作を始めるタイミング">
+<!ENTITY config.show_onkeypress.disabled "タブ切り替えのキーボードショートカットを使ったときに始める">
+<!ENTITY config.show_onkeypress.enabled  "Ctrl(Command)キーを押しただけで始める">
 
-<!ENTITY stackstyletabs.switch_onkeyrelease          "タブを切り替えるタイミング">
-<!ENTITY stackstyletabs.switch_onkeyrelease.disabled "ダイナミックに切り替える">
-<!ENTITY stackstyletabs.switch_onkeyrelease.enabled  "Ctrl(Command)キーを放したときに切り替える">
-
-
-<!ENTITY stackstyletabs.about.title       "スタック型タブについて">
-<!ENTITY stackstyletabs.about.name_before "スタック型タブ Ver.">
-<!ENTITY stackstyletabs.about.name_after  "">
-<!ENTITY stackstyletabs.about.destributed "http://piro.sakura.ne.jp/">
-<!ENTITY stackstyletabs.about.uninstall   "アンインストール">
+<!ENTITY config.switch_onkeyrelease          "タブを切り替えるタイミング">
+<!ENTITY config.switch_onkeyrelease.disabled "ダイナミックに切り替える">
+<!ENTITY config.switch_onkeyrelease.enabled  "Ctrl(Command)キーを放したときに切り替える">

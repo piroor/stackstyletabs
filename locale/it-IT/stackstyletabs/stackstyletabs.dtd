@@ -1,34 +1,27 @@
-<!ENTITY stackstyletabs.title             "Stack Style Tabs">
+<!ENTITY config.title             "Stack Style Tabs">
 
 
-<!ENTITY stackstyletabs.basic.group        "Impostazioni">
-<!ENTITY stackstyletabs.basic.likePlatform "Emula lo stile dello spostamento tra le finestre delle applicazioni nel sistema operativo">
-<!ENTITY stackstyletabs.basic.custom       "Personalizza">
-<!ENTITY stackstyletabs.basic.advance      "Avanzate...">
-<!ENTITY stackstyletabs.advance.title      "Impostazioni avanzate di Stack Style Tabs">
+<!ENTITY config.basic.group        "Impostazioni">
+<!ENTITY config.basic.likePlatform "Emula lo stile dello spostamento tra le finestre delle applicazioni nel sistema operativo">
+<!ENTITY config.basic.custom       "Personalizza">
+<!ENTITY config.basic.advance      "Avanzate...">
+<!ENTITY config.advance.title      "Impostazioni avanzate di Stack Style Tabs">
 
 
-<!ENTITY stackstyletabs.mode                "Metodo di visualizzazione">
-<!ENTITY stackstyletabs.mode.disable        "Disattivato">
-<!ENTITY stackstyletabs.mode.show           "Visualizza popup">
-<!ENTITY stackstyletabs.mode.hide           "Visualizza popup e nascondi la barra delle schede">
-<!ENTITY stackstyletabs.mode.auto           "Visualizza/nascondi automaticamente la barra delle schede durante il cambio scheda">
+<!ENTITY config.mode                "Metodo di visualizzazione">
+<!ENTITY config.mode.disable        "Disattivato">
+<!ENTITY config.mode.show           "Visualizza popup">
+<!ENTITY config.mode.hide           "Visualizza popup e nascondi la barra delle schede">
+<!ENTITY config.mode.auto           "Visualizza/nascondi automaticamente la barra delle schede durante il cambio scheda">
 
-<!ENTITY stackstyletabs.last_selected_order          "Ordinamento schede">
-<!ENTITY stackstyletabs.last_selected_order.enabled  "In ordine inverso di selezione">
-<!ENTITY stackstyletabs.last_selected_order.disabled "In ordine di apertura">
+<!ENTITY config.last_selected_order          "Ordinamento schede">
+<!ENTITY config.last_selected_order.enabled  "In ordine inverso di selezione">
+<!ENTITY config.last_selected_order.disabled "In ordine di apertura">
 
-<!ENTITY stackstyletabs.show_onkeypress          "Avvia il cambio scheda">
-<!ENTITY stackstyletabs.show_onkeypress.disabled "Alla pressione della scorciatoia che porta in primo piano la scheda precedente o quella successiva">
-<!ENTITY stackstyletabs.show_onkeypress.enabled  "Alla pressione del tasto Ctrl (Command)">
+<!ENTITY config.show_onkeypress          "Avvia il cambio scheda">
+<!ENTITY config.show_onkeypress.disabled "Alla pressione della scorciatoia che porta in primo piano la scheda precedente o quella successiva">
+<!ENTITY config.show_onkeypress.enabled  "Alla pressione del tasto Ctrl (Command)">
 
-<!ENTITY stackstyletabs.switch_onkeyrelease          "Modalità di cambio">
-<!ENTITY stackstyletabs.switch_onkeyrelease.disabled "Dinamica">
-<!ENTITY stackstyletabs.switch_onkeyrelease.enabled  "Al rilascio del tasto Ctrl (Command)">
-
-
-<!ENTITY stackstyletabs.about.title       "Informazioni su Stack Style Tabs">
-<!ENTITY stackstyletabs.about.name_before "Stack Style Tabs ver.">
-<!ENTITY stackstyletabs.about.name_after  "">
-<!ENTITY stackstyletabs.about.destributed "http://piro.sakura.ne.jp/">
-<!ENTITY stackstyletabs.about.uninstall   "Disinstalla">
+<!ENTITY config.switch_onkeyrelease          "Modalità di cambio">
+<!ENTITY config.switch_onkeyrelease.disabled "Dinamica">
+<!ENTITY config.switch_onkeyrelease.enabled  "Al rilascio del tasto Ctrl (Command)">
