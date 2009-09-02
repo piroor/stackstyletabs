@@ -1,29 +1,6 @@
 // start of definition 
 if (!window.StackStyleTabsService) {
 
-/*
-	0 = disabled
-	1 = show the tab bar always and use popup
-	2 = hide the tab bar always and use popup
-	3 = show/hide tab bar automatically
-*/
-if (nsPreferences.getIntPref('stackstyletabs.mode') === null)
-	nsPreferences.setIntPref('stackstyletabs.mode', 1);
-
-if (nsPreferences.getBoolPref('stackstyletabs.last_selected_order') === null)
-	nsPreferences.setBoolPref('stackstyletabs.last_selected_order', true);
-
-if (nsPreferences.getBoolPref('stackstyletabs.show_onkeypress') === null)
-	nsPreferences.setBoolPref('stackstyletabs.show_onkeypress', false);
-
-if (nsPreferences.getBoolPref('stackstyletabs.switch_onkeyrelease') === null)
-	nsPreferences.setBoolPref('stackstyletabs.switch_onkeyrelease', true);
-
-// for TBE
-// if (nsPreferences.getBoolPref('stackstyletabs.menu_sorting.enabled') === null)
-// 	nsPreferences.setBoolPref('stackstyletabs.menu_sorting.enabled', false);
-
-
 var StackStyleTabsService = {
 
 	get popupShown()
@@ -33,16 +10,8 @@ var StackStyleTabsService = {
 
 	get browser()
 	{
-		if (!this._browser) {
-			this._browser = document.getElementById('content');
-			if (!this._browser) {
-				this._browser = document.getElementsByTagNameNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'tabbrowser');
-				this._browser = (this._browser.length) ? this._browser[0] : null ;
-			}
-		}
-		return this._browser;
+		return gBrowser;
 	},
-	_browser : null,
 
 	get tabs()
 	{
@@ -116,7 +85,7 @@ var StackStyleTabsService = {
 			!aEvent.altKey &&
 			(navigator.platform.match(/mac/i) ? aEvent.metaKey : aEvent.ctrlKey )
 			) {
-			if (nsPreferences.getBoolPref('stackstyletabs.show_onkeypress'))
+			if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.show_onkeypress'))
 				StackStyleTabsService.showTabs();
 		}
 		else
@@ -156,8 +125,8 @@ var StackStyleTabsService = {
 			if (
 				aEvent.type == 'keypress' &&
 				(
-					nsPreferences.getIntPref('stackstyletabs.mode') == 1 ||
-					nsPreferences.getIntPref('stackstyletabs.mode') == 2
+					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
+					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
 				)
 				) {
 				aEvent.preventDefault();
@@ -234,13 +203,13 @@ var StackStyleTabsService = {
 		if (!b) return;
 
 		if (
-			nsPreferences.getIntPref('stackstyletabs.mode') == 1 ||
-			nsPreferences.getIntPref('stackstyletabs.mode') == 2
+			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
+			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
 			) {
 			this.showHidePopup(true);
 		}
 
-		if (nsPreferences.getIntPref('stackstyletabs.mode') == 3) {
+		if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 3) {
 			b.mStrip.collapsed = false;
 			b.mStrip.removeAttribute('stackstyletabs-hidden');
 		}
@@ -252,13 +221,13 @@ var StackStyleTabsService = {
 		if (!b) return;
 
 		if (
-			nsPreferences.getIntPref('stackstyletabs.mode') == 1 ||
-			nsPreferences.getIntPref('stackstyletabs.mode') == 2
+			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 1 ||
+			window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') == 2
 			) {
 			this.showHidePopup(false, aPreventSwitchTab);
 		}
 
-		if (nsPreferences.getIntPref('stackstyletabs.mode') > 1) {
+		if (window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.mode') > 1) {
 			b.mStrip.collapsed = true;
 			b.mStrip.setAttribute('stackstyletabs-hidden', true);
 		}
@@ -272,7 +241,7 @@ var StackStyleTabsService = {
 		if (!aShow) {
 			if (popup.hasChildNodes()) {
 				if (this.popupShown &&
-					nsPreferences.getBoolPref('stackstyletabs.switch_onkeyrelease') &&
+					window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.switch_onkeyrelease') &&
 					!aPreventSwitchTab) {
 					var tab = this.tabs[popup.childNodes[popup.currentIndex].index];
 
@@ -301,7 +270,7 @@ var StackStyleTabsService = {
 		var b = this.browser;
 		var tabs = this.tabs;
 
-		var sortLastSelected = nsPreferences.getBoolPref('stackstyletabs.last_selected_order');
+		var sortLastSelected = window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.last_selected_order');
 
 		if (sortLastSelected) {
 			var tmpTabs     = [];
@@ -326,7 +295,7 @@ var StackStyleTabsService = {
 		}
 		else {
 			if ('mTabs' in b &&
-				nsPreferences.getBoolPref('stackstyletabs.menu_sorting.enabled')) { // for TBE
+				window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.menu_sorting.enabled')) { // for TBE
 				var root = { childTabs : [] };
 				for (i in b.mTabs)
 					if (!b.mTabs[i].parentTab)
@@ -407,7 +376,7 @@ var StackStyleTabsService = {
 		else
 			popup.currentIndex = (popup.currentIndex + 1) % popup.childNodes.length;
 
-		if (!nsPreferences.getBoolPref('stackstyletabs.switch_onkeyrelease')) {
+		if (!window['piro.sakura.ne.jp'].prefs.getPref('stackstyletabs.switch_onkeyrelease')) {
 			this.browser.selectedTab = this.tabs[popup.childNodes[popup.currentIndex].index];
 		}
 
@@ -428,6 +397,6 @@ var StackStyleTabsService = {
 }; 
   
 // end of definition 
-StackStyleTabsService.init();
+window.setTimeout('StackStyleTabsService.init();', 100);
 }
  

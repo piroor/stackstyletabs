@@ -3,8 +3,6 @@
 <?xml-stylesheet href="chrome://stackstyletabs/content/prefOverlay.css" type="text/css"?>
 
 <!DOCTYPE overlay [
-<!ENTITY % versionDTD SYSTEM "chrome://stackstyletabs/content/_version.dtd">
-%versionDTD;
 <!ENTITY % stackstyletabsDTD SYSTEM "chrome://stackstyletabs/locale/">
 %stackstyletabsDTD;
 ]>
@@ -13,7 +11,6 @@
 
 <box orient="vertical" id="stackstyletabsPrefs">
 
-<script type="application/x-javascript" src="chrome://stackstyletabs/content/exUnregisterer.js"/>
 <script type="application/x-javascript" src="chrome://stackstyletabs/content/prefOverlay.js"/>
 
 
@@ -42,31 +39,6 @@
 				prefstring="stackstyletabs.switch_onkeyrelease"/>
 			<checkbox id="show_onkeypress"
 				prefstring="stackstyletabs.show_onkeypress"/>
-		</box>
-	</groupbox>
-
-	<spacer flex="1"/>
-
-	<groupbox orient="vertical">
-		<caption label="&stackstyletabs.about.title;"/>
-		<box orient="horizontal">
-			<spacer flex="1"/>
-			<description value="&stackstyletabs.about.name_before;&stackstyletabs.version;&stackstyletabs.about.name_after;"/>
-			<spacer flex="1"/>
-		</box>
-		<box orient="horizontal">
-			<spacer flex="1"/>
-			<description value="&stackstyletabs.about.destributed;"
-				onclick="loadURI('http://piro.sakura.ne.jp/');"
-				class="text-link"/>
-			<spacer flex="1"/>
-		</box>
-		<box orient="horizontal" id="uninstallBox">
-			<spacer flex="2"/>
-			<button flex="1"
-				label="&stackstyletabs.about.uninstall;"
-				oncommand="Unregister();"/>
-			<spacer flex="2"/>
 		</box>
 	</groupbox>
 

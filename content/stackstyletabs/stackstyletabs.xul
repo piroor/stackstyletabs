@@ -1,21 +1,10 @@
 <?xml version="1.0"?>
-
-<?xml-stylesheet href="chrome://stackstyletabs/content/stackstyletabs.css" type="text/css"?>
-
+<?xml-stylesheet href="stackstyletabs.css" type="text/css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
-<script type="application/x-javascript" src="chrome://stackstyletabs/content/stackstyletabs.js"/>
-
-<!-- old Mozilla -->
-<popupset id="contentAreaContextSet">
-	<popupset id="mainPopupSet"/>
-</popupset>
-
+<script type="application/x-javascript; version=1.7" src="prefs.js"/>
+<script type="application/x-javascript; version=1.7" src="stackstyletabs.js"/>
 <popupset id="mainPopupSet">
 	<popup id="stackstyletabs-popup"
 		onmousedown="StackStyleTabsService.onItemSelect(event.target);"/>
 </popupset>
-
-
 </overlay>
