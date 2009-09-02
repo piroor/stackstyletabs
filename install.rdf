@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{149C6CC6-EC62-4ebd-B719-3C2E867930C7}"
                    em:name="Stack Style Tabs"
-                   em:version="1.1.2008042801"
+                   em:version="2.0.2009090200"
                    em:creator="SHIMODA Hiroshi"
                    em:description="Hide the tab bar and show it automatically only when you press &quot;Ctrl&quot; or &quot;Command&quot; key."
                    em:homepageURL="http://piro.sakura.ne.jp/xul/_stackstyletabs.html.en"
