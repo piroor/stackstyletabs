@@ -14,9 +14,8 @@
 	onload="init();">
 
 
-<script type="application/x-javascript" src="chrome://stackstyletabs/content/exUnregisterer.js"/>
-<script type="application/x-javascript" src="chrome://stackstyletabs/content/prefOverlay.js"/>
-<script type="application/x-javascript" src="chrome://stackstyletabs/content/advance.js"/>
+<script type="application/x-javascript; version=1.7" src="config.js"/>
+<script type="application/x-javascript; version=1.7" src="configAdvanced.js"/>
 
 <box orient="vertical"
 	oncommand="onCommand(event)">

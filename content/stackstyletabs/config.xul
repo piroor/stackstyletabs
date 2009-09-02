@@ -2,8 +2,7 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
-
-<?xul-overlay href="chrome://stackstyletabs/content/prefOverlay.xul"?>
+<?xml-stylesheet href="prefOverlay.css" type="text/css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://stackstyletabs/locale/">
 
@@ -106,6 +105,39 @@ function apply()
 
 ]]></script>
 
-<box id="stackstyletabsPrefs"/>
+<box orient="vertical" id="stackstyletabsPrefs">
+
+<script type="application/x-javascript; version=1.7" src="config.js"/>
+
+
+	<groupbox>
+		<caption label="&stackstyletabs.basic.group;"/>
+		<radiogroup id="basic"
+			oncommand="onBasicChanged();">
+			<radio value="0" label="&stackstyletabs.basic.likePlatform;"/>
+			<box orient="horizontal">
+				<radio id="basic-custom"
+					value="1"
+					label="&stackstyletabs.basic.custom;"
+					linked="basic-custom-button"/>
+				<button id="basic-custom-button"
+					label="&stackstyletabs.basic.advance;"
+					oncommand="advancePrefs('chrome://stackstyletabs/content/configAdvanced.xul', gAdvancePrefs)"/>
+			</box>
+		</radiogroup>
+		<box collapsed="true">
+			<textbox id="mode"
+				prefstring="stackstyletabs.mode"
+				preftype="int"/>
+			<checkbox id="last_selected_order"
+				prefstring="stackstyletabs.last_selected_order"/>
+			<checkbox id="switch_onkeyrelease"
+				prefstring="stackstyletabs.switch_onkeyrelease"/>
+			<checkbox id="show_onkeypress"
+				prefstring="stackstyletabs.show_onkeypress"/>
+		</box>
+	</groupbox>
+
+</box>
 
 </dialog>
