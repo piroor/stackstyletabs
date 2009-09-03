@@ -1,10 +1,34 @@
 var StackStyleTabsService = { 
 	
-	mode : 0, 
+	_mode : 0, 
 	kMODE_DISABLED        : 0,
 	kMODE_SHOW_TABBAR     : 1,
 	kMODE_HIDE_TABBAR     : 2,
 	kMODE_AUTOHIDE_TABBAR : 3,
+	get mode()
+	{
+		return this._mode;
+	},
+	set mode(aValue)
+	{
+		var prevMode = this._mode;
+		this._mode = aValue;
+		if (prevMode == this.kMODE_DISABLED &&
+			this._mode > this.kMODE_DISABLED) {
+			window.addEventListener('keydown', this, true);
+			window.addEventListener('keyup', this, true);
+			window.addEventListener('keypress', this, true);
+			window.addEventListener('mousedown', this, true);
+		}
+		else if (prevMode != this.kMODE_DISABLED &&
+				this._mode == this.kMODE_DISABLED) {
+			window.removeEventListener('keydown', this, true);
+			window.removeEventListener('keyup', this, true);
+			window.removeEventListener('keypress', this, true);
+			window.removeEventListener('mousedown', this, true);
+		}
+		return aValue;
+	},
 
 	shouldSortByLastSelected : false,
 	shouldSwitchImmediately : false,
@@ -13,6 +37,12 @@ var StackStyleTabsService = {
 	// properties 
 	
 	isMac : navigator.platform.match(/mac/i), 
+ 
+	get ctrlTabPreviewsEnabled() 
+	{
+		return 'allTabs' in window &&
+				this.getPref('browser.ctrlTab.previews');
+	},
  
 	get popupShown() 
 	{
@@ -55,16 +85,12 @@ var StackStyleTabsService = {
 	{
 		if (!this.browser) return;
 
-		window.addEventListener('keydown', this, true);
-		window.addEventListener('keyup', this, true);
-		window.addEventListener('keypress', this, true);
-		window.addEventListener('mousedown', this, true);
-
 		this.initBrowser(this.browser);
 
 		this.addPrefListener(this);
 
-		this.onPrefChange('stackstyletabs.mode');
+		// this.onPrefChange('stackstyletabs.mode');
+		this.onPrefChange('browser.ctrlTab.previews');
 		this.onPrefChange('stackstyletabs.last_selected_order');
 		this.onPrefChange('stackstyletabs.show_onkeypress');
 		this.onPrefChange('stackstyletabs.switch_onkeyrelease');
@@ -81,10 +107,7 @@ var StackStyleTabsService = {
 	{
 		if (!this.browser) return;
 
-		window.removeEventListener('keydown', this, true);
-		window.removeEventListener('keyup', this, true);
-		window.removeEventListener('keypress', this, true);
-		window.removeEventListener('mousedown', this, true);
+		this.mode = this.kMODE_DISABLED;
 
 		this.destroyBrowser(this.browser);
 
@@ -257,13 +280,20 @@ var StackStyleTabsService = {
 			this.onPrefChange(aData);
 	},
 	
-	domain : 'stackstyletabs.', 
+	domains : [ 
+		'stackstyletabs.',
+		'browser.ctrlTab.previews'
+	],
  
 	onPrefChange : function(aPref) 
 	{
 		var value = this.getPref(aPref);
 		switch (aPref)
 		{
+			case 'browser.ctrlTab.previews':
+				value = this.ctrlTabPreviewsEnabled ?
+					this.kMODE_DISABLED :
+					this.getPref('stackstyletabs.mode') ;
 			case 'stackstyletabs.mode':
 				this.mode = value;
 				this.hideTabs();
