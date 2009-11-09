@@ -195,7 +195,8 @@ var StackStyleTabsService = {
 			( // when you release "shift" key on the menu
 				this.popupShown &&
 				standBy && !aEvent.shiftKey &&
-				aEvent.charCode == 0 && aEvent.keyCode == 16
+				aEvent.keyCode == 16 &&
+				(aEvent.type == 'keyup' || aEvent.charCode == 0)
 			)
 			) {
 			this.showTabs(true);
