@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="stackstyletabs.css" type="text/css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script type="application/x-javascript; version=1.7" src="prefs.js"/>
-<script type="application/x-javascript; version=1.7" src="stackstyletabs.js"/>
+<script type="application/javascript" src="prefs.js"/>
+<script type="application/javascript" src="stackstyletabs.js"/>
 <popupset id="mainPopupSet">
 	<menupopup id="stackstyletabs-popup"
 		onmousedown="StackStyleTabsService.onItemSelect(event.target);"/>
