@@ -71,6 +71,11 @@ var StackStyleTabsService = {
 		return array;
 	},
  
+	get tabStrip() 
+	{
+		return this.browser.mStirp || this.browser.tabContainer.parentNode;
+	},
+ 
 	get popup() 
 	{
 		if (!this._popup)
@@ -327,9 +332,10 @@ var StackStyleTabsService = {
 			this.showHidePopup(true);
 		}
 
+		var strip = this.getTabStrip(b);
 		if (this.mode == this.kMODE_AUTOHIDE_TABBAR) {
-			b.mStrip.collapsed = false;
-			b.mStrip.removeAttribute('stackstyletabs-hidden');
+			strip.collapsed = false;
+			strip.removeAttribute('stackstyletabs-hidden');
 		}
 	},
  
@@ -345,10 +351,11 @@ var StackStyleTabsService = {
 			this.showHidePopup(false, aPreventSwitchTab);
 		}
 
+		var strip = this.getTabStrip(b);
 		if (this.mode > this.kMODE_SHOW_TABBAR)
-			b.mStrip.setAttribute('stackstyletabs-hidden', true);
+			strip.setAttribute('stackstyletabs-hidden', true);
 		else
-			b.mStrip.removeAttribute('stackstyletabs-hidden');
+			strip.removeAttribute('stackstyletabs-hidden');
 	},
  
 	showHidePopup : function(aShow, aPreventSwitchTab) 
