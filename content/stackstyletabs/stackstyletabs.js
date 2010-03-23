@@ -73,7 +73,7 @@ var StackStyleTabsService = {
  
 	get tabStrip() 
 	{
-		return this.browser.mStirp || this.browser.tabContainer.parentNode;
+		return this.browser.mStrip || this.browser.tabContainer.parentNode;
 	},
  
 	get popup() 
