@@ -73,7 +73,10 @@ var StackStyleTabsService = {
  
 	get tabStrip() 
 	{
-		return this.browser.mStrip || this.browser.tabContainer.parentNode;
+		var strip = this.browser.mStrip;
+		return (strip && strip.localName == 'hbox') ?
+				strip :
+				this.browser.tabContainer.parentNode;
 	},
  
 	get popup() 
