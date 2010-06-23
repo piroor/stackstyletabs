@@ -6,3 +6,4 @@ locale	stackstyletabs	en-US	jar:chrome/stackstyletabs.jar!/locale/en-US/stacksty
 locale	stackstyletabs	ja	jar:chrome/stackstyletabs.jar!/locale/ja/stackstyletabs/
 locale	stackstyletabs	it-IT	jar:chrome/stackstyletabs.jar!/locale/it-IT/stackstyletabs/
 
+resource stackstyletabs-modules modules/

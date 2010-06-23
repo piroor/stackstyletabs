@@ -491,7 +491,11 @@ var StackStyleTabsService = {
 	}
  
 }; 
-StackStyleTabsService.__proto__ = window['piro.sakura.ne.jp'].prefs;
+(function() {
+	var namespace = {};
+	Components.utils.import('resource://stackstyletabs-modules/prefs.js', namespace);
+	StackStyleTabsService.__proto__ = namespace.prefs;
+})();
 
 window.addEventListener('load', StackStyleTabsService, false);
 window.addEventListener('unload', StackStyleTabsService, false);
