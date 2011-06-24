@@ -20,8 +20,8 @@
 
 <!ENTITY config.show_onkeypress          "Start switching of tabs when">
 <!ENTITY config.show_onkeypress.disabled "Press keyboard shortcuts which focuses to the next or the previous tab">
-<!ENTITY config.show_onkeypress.enabled  "Press only Ctrl(Command) key">
+<!ENTITY config.show_onkeypress.enabled  "Press only Ctrl/⌘ key">
 
 <!ENTITY config.switch_onkeyrelease          "Switching mode">
 <!ENTITY config.switch_onkeyrelease.disabled "Switch tabs dynamically">
-<!ENTITY config.switch_onkeyrelease.enabled  "Switch only when the Ctrl(Command) key is released">
+<!ENTITY config.switch_onkeyrelease.enabled  "Switch only when the Ctrl/⌘ key is released">

@@ -20,8 +20,8 @@
 
 <!ENTITY config.show_onkeypress          "Avvia il cambio scheda">
 <!ENTITY config.show_onkeypress.disabled "Alla pressione della scorciatoia che porta in primo piano la scheda precedente o quella successiva">
-<!ENTITY config.show_onkeypress.enabled  "Alla pressione del tasto Ctrl (Command)">
+<!ENTITY config.show_onkeypress.enabled  "Alla pressione del tasto Ctrl/⌘">
 
 <!ENTITY config.switch_onkeyrelease          "Modalità di cambio">
 <!ENTITY config.switch_onkeyrelease.disabled "Dinamica">
-<!ENTITY config.switch_onkeyrelease.enabled  "Al rilascio del tasto Ctrl (Command)">
+<!ENTITY config.switch_onkeyrelease.enabled  "Al rilascio del tasto Ctrl/⌘">

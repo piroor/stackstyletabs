@@ -20,8 +20,8 @@
 
 <!ENTITY config.show_onkeypress          "タブ切り替え操作を始めるタイミング">
 <!ENTITY config.show_onkeypress.disabled "タブ切り替えのキーボードショートカットを使ったときに始める">
-<!ENTITY config.show_onkeypress.enabled  "Ctrl(Command)キーを押しただけで始める">
+<!ENTITY config.show_onkeypress.enabled  "Ctrl/⌘キーを押しただけで始める">
 
 <!ENTITY config.switch_onkeyrelease          "タブを切り替えるタイミング">
 <!ENTITY config.switch_onkeyrelease.disabled "ダイナミックに切り替える">
-<!ENTITY config.switch_onkeyrelease.enabled  "Ctrl(Command)キーを放したときに切り替える">
+<!ENTITY config.switch_onkeyrelease.enabled  "Ctrl/⌘キーを放したときに切り替える">
