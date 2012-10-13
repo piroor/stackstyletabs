@@ -168,4 +168,4 @@ Preferences（設定） > Advanced（詳細） > Stack Style Tabs（スタック型
 
 ------------------------------------------------------------------------
 Stack Style Tabs for Netscape 7 & Mozilla & Firefox
-Copyright 2004-2006 Piro(SHIMODA Hiroshi)
+Copyright 2004-2006 Piro(YUKI "Piro" Hiroshi)
