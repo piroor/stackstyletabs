@@ -6,7 +6,7 @@
                    em:id="{149C6CC6-EC62-4ebd-B719-3C2E867930C7}"
                    em:name="Stack Style Tabs"
                    em:version="2.0.2009110201"
-                   em:creator="SHIMODA Hiroshi"
+                   em:creator="YUKI &quot;Piro&quot; Hiroshi"
                    em:description="Hide the tab bar and show it automatically only when you press &quot;Ctrl&quot; or &quot;Command&quot; key."
                    em:homepageURL="http://piro.sakura.ne.jp/xul/_stackstyletabs.html.en"
                    em:optionsURL="chrome://stackstyletabs/content/config.xul">
