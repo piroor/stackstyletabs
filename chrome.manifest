@@ -1,9 +1,9 @@
-content	stackstyletabs	jar:chrome/stackstyletabs.jar!/content/stackstyletabs/
+content	stackstyletabs	content/stackstyletabs/
 
 overlay	chrome://browser/content/browser.xul	chrome://stackstyletabs/content/stackstyletabs.xul
 
-locale	stackstyletabs	en-US	jar:chrome/stackstyletabs.jar!/locale/en-US/stackstyletabs/
-locale	stackstyletabs	ja	jar:chrome/stackstyletabs.jar!/locale/ja/stackstyletabs/
-locale	stackstyletabs	it-IT	jar:chrome/stackstyletabs.jar!/locale/it-IT/stackstyletabs/
+locale	stackstyletabs	en-US	locale/en-US/stackstyletabs/
+locale	stackstyletabs	ja	locale/ja/stackstyletabs/
+locale	stackstyletabs	it-IT	locale/it-IT/stackstyletabs/
 
 resource stackstyletabs-modules modules/
