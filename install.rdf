@@ -9,7 +9,8 @@
                    em:creator="YUKI &quot;Piro&quot; Hiroshi"
                    em:description="Hide the tab bar and show it automatically only when you press &quot;Ctrl&quot; or &quot;Command&quot; key."
                    em:homepageURL="http://piro.sakura.ne.jp/xul/_stackstyletabs.html.en"
-                   em:optionsURL="chrome://stackstyletabs/content/config.xul">
+                   em:optionsURL="chrome://stackstyletabs/content/config.xul"
+                   em:type="2">
 <!--
                    em:iconURL=""
 -->
