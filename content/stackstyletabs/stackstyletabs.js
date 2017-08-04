@@ -58,7 +58,7 @@ var StackStyleTabsService = {
 	{
 		var tabs = document.evaluate(
 				'descendant::*[local-name()="tab"]',
-				this.browser.mTabContainer,
+				this.browser.tabContainer,
 				null,
 				XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
 				null
@@ -107,7 +107,7 @@ var StackStyleTabsService = {
 	initBrowser : function(aBrowser) 
 	{
 		if (aBrowser.localName != 'tabbrowser') return;
-		aBrowser.mTabContainer.addEventListener('select', this, true);
+		aBrowser.tabContainer.addEventListener('select', this, true);
 		aBrowser.selectedTab.__stackstyletabs__lastSelectedTime = Date.now();
 	},
   
@@ -125,7 +125,7 @@ var StackStyleTabsService = {
 	destroyBrowser : function(aBrowser) 
 	{
 		if (aBrowser.localName != 'tabbrowser') return;
-		aBrowser.mTabContainer.removeEventListener('select', this, true);
+		aBrowser.tabContainer.removeEventListener('select', this, true);
 	},
    
 	handleEvent : function(aEvent) 
@@ -448,7 +448,7 @@ var StackStyleTabsService = {
 		);
 
 		popup.currentIndex = this.shouldSortByLastSelected ? 0 :
-							b.mTabContainer.selectedIndex ;
+							b.tabContainer.selectedIndex ;
 		popup.childNodes[popup.currentIndex].setAttribute('_moz-menuactive', true);
 	},
  
